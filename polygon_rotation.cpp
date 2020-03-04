@@ -5,9 +5,10 @@
 #include <GL/glut.h>
 using namespace std;
 
-int pntX1, pntY1, choice = 0, edges;
+int pntX1, pntY1,pntz1, choice = 0, edges;
 vector<int> pntX;
 vector<int> pntY;
+vector<int> pntz;
 int transX, transY;
 double scaleX, scaleY;
 double angle, angleRad;
@@ -25,7 +26,7 @@ void drawPolygon()
 	glColor3f(1.0, 0.0, 0.0);
 	for (int i = 0; i < edges; i++)
 	{
-		glVertex2i(pntX[i], pntY[i]);
+		glVertex3i(pntX[i], pntY[i],pntz[i]);
 	}
 	glEnd();
 }
@@ -37,7 +38,7 @@ void drawPolygonRotation(double angleRad)
 	glColor3f(0.0, 0.0, 1.0);
 	for (int i = 0; i < edges; i++)
 	{
-		glVertex2i(round((pntX[i] * cos(angleRad)) - (pntY[i] * sin(angleRad))), round((pntX[i] * sin(angleRad)) + (pntY[i] * cos(angleRad))));
+		glVertex3i(round(pntX[i]), round((pntY[i] * cos(angleRad)) - (pntz[i] * sin(angleRad))),round((pntY[i] * sin(angleRad)) - (pntz[i] * cos(angleRad))));
 	}
 	glEnd();
 }
@@ -74,9 +75,10 @@ int main(int argc, char** argv)
 
 	for (int i = 0; i < edges; i++)
 	{
-		cout << "Enter co-ordinates for vertex  " << i + 1 << " : "; cin >> pntX1 >> pntY1;
+		cout << "Enter co-ordinates for vertex  " << i + 1 << " : "; cin >> pntX1 >> pntY1>>pntz1;
 		pntX.push_back(pntX1);
 		pntY.push_back(pntY1);
+		pntz.push_back(pntz1);
 	}
 
 	
